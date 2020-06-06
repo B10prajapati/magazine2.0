@@ -97,7 +97,7 @@
   $comment_data = $response['data'];
   $comment_message = $response['message'];
   
-  // Comment Reply Data
+  // Comment'<a href="#" onclick="function(){}"D'ata
   $get_data = CallAPI('GET',SITE_URL.'api/comment/read?method=getAllAcceptedReplyInBlog&blog_id='.$_GET['id'].'&comment_id=1', false);
   $response = json_decode($get_data, true);
 
@@ -123,26 +123,24 @@
     $reply_data = $response['data'];
     $reply_message = $response['message'];
     ?>
-    <div class="container-fluid">
-      <p><?php echo $comment['name']?></p>
+    <div class="container">
+
+      <div>
+        <h6><?php echo $comment['name']?></h6>
+        <p><?php echo $comment['created_date']?></p>
+      </div>
+      
       <p><?php echo $comment['message']?></p>
-    
+
+      <a class="reply" href="#ReplySection" onclick="comment(this);" data-commentID="<?php echo $comment['id']?>" data-commentname="<?php echo $comment['name']?>">Reply</a>
     <?php
-      array_map('renderReply',$reply_data);
+      if(isset($reply_data) && !empty($reply_data))
+        array_map('renderComments',$reply_data);
     ?>
     </div>
     <?php
   }
 
-  function renderReply($reply) {
-    ?>
-    <div class="container">
-      <p><?php echo $reply['name']?></p>
-      <p><?php echo $reply['message']?></p>
-    </div>
-    
-    <?php
-  }
 ?>
 
 <?php renderBlogHeader($data[0])?>
@@ -168,7 +166,7 @@
     <div class="container">
       <div class="section-row" id="ReplySection">
         <div class="section-title">
-          <h2>Leave a reply</h2>
+          <div id="reply_title"><h2>Leave a reply</h2></div>
           <h6>your email address will not be published. required fields are marked *</h6>
         </div>
         <form class="form" action="../process/create-edit" method="post">
@@ -196,6 +194,7 @@
                 <textarea class="form-control" name="message" placeholder="Message"></textarea>
               </div>
               <input type="hidden" name="commentid" id="comment_id" value="">
+              <input type="hidden" name="commentType" id="comment_type" value="comment">
               <input type="hidden" name="blogid" value="<?php echo($_GET['id']) ?>">
               <input type="hidden" name="page_name" value="view">
               <button class="btn btn-primary" type="submit" name="submit" value="create">Submit</button>
@@ -228,6 +227,21 @@
   </div>
   </div>
 </div>
+
+<script>
+  function comment(element) {
+    var id = $(element).data();
+    console.log(id.commentid);
+    $('#comment_id').val(id.commentid);
+    $('#comment_type').val('reply');
+    $('#reply_title').html(`<h2>Reply to : ${id.commentname} </h2><a href="#ReplySection" onclick="cancel(this)">Cancel</a>`);
+  }
+  function cancel(){
+    $('#reply_title').html('<h2>Leave a Comment</h2>');
+    $("#comment_id").val("");
+    $("#comment_type").val("comment");
+  }
+</script>
 <?php
   include '../inc/footer.php';
 ?>

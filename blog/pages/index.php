@@ -78,7 +78,7 @@
   <div class="row">
 
     <!-- Most Recent -->
-      <?php array_map('renderRecent', getRandomData($recent_data, 4, false));?>  
+      <?php array_map('renderRecent', getRandomData($recent_data, 6, false));?>  
   </div>
 
   <h6>TABLE</h6>
@@ -87,7 +87,7 @@
     <div class="col-lg-8">
       <!-- Most Recent -->
       <h6>Recent</h6>
-      <?php array_map('renderMostPopular', getRandomData($recent_data, 2, false));?>  
+      <?php array_map('renderMostPopular', getRandomData($recent_data, 4, false));?>  
     </div> 
     <!-- Content Side Column -->
     <div class="col-lg-4">

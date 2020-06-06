@@ -39,7 +39,8 @@ include '../inc/navbar.php';
                 <td>'.date("M d Y",strtotime($data['date'])).'</td>
                 <td>'.date("Y",strtotime($data['date'])).'</td>
                 <td>'.date("M",strtotime($data['date'])).'</td>
-                <td>'.date("d",strtotime($data['status'])).'</td>
+                <td>'.date("d",strtotime($data['date'])).'</td>
+                <td>'.$data['status'].'</td>
                 <td>
                   <a class="btn btn-success" href="javascript:;" onClick="edit(this);" data-info=\''.json_encode($data).'\'>
                     Edit

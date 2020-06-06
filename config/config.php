@@ -18,7 +18,7 @@
 		define('SITE_URL', 'http://magazine.com/');
 	}else{
 		error_reporting(E_ALL);
-		define('DB_HOST', '	fdb25.awardspace.net');
+		define('DB_HOST', 'fdb25.awardspace.net');
 		define('DB_NAME', '3460660__magazine');
 		define('DB_USER', 'admin');
 		define('DB_PASS', 'wT1t},bd62RF@fA[');

@@ -1,6 +1,6 @@
 <?php
   include $_SERVER['DOCUMENT_ROOT'].'/config/init.php';
-  // $schema = new schema();
+   $schema = new schema();
 
   $table = array(
     'users' => "
