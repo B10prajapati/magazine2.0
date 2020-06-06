@@ -23,7 +23,8 @@
 		define('DB_USER', 'admin');
 		define('DB_PASS', 'wT1t},bd62RF@fA[');
 		define('SITE_URL', 'https://sahasprajapati.000webhostapp.com/');
-		
+	
+	ini_set("display_errors", 1);	
 	}
 
 	define('ERROR_PATH', $_SERVER['DOCUMENT_ROOT'].'error/');

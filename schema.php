@@ -144,10 +144,15 @@
         )
     "
   );
+  debugger('mysql:host='.DB_HOST.';dbname='.DB_NAME.'  '.DB_USER.'  '.DB_PASS);
+  debugger('Started Conenction');
+  $conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME,DB_USER,DB_PASS);
+	$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+  $conn->exec('SET NAMES utf8');
+  debugger('Database cconnected');
 
 
-  debugger($table, true);
-
+  
   // foreach ($table as $key => $sql) {
 	// 	try{
 	// 		$success = $schema->create($sql);
