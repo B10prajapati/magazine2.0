@@ -17,12 +17,13 @@
 		define('DB_PASS', '');
 		define('SITE_URL', 'http://magazine.com/');
 	}else{
-		error_reporting(0);
+		error_reporting(E_ALL);
 		define('DB_HOST', '	fdb25.awardspace.net');
 		define('DB_NAME', '3460660__magazine');
 		define('DB_USER', 'admin');
 		define('DB_PASS', 'wT1t},bd62RF@fA[');
 		define('SITE_URL', 'https://sahasprajapati.000webhostapp.com/');
+		
 	}
 
 	define('ERROR_PATH', $_SERVER['DOCUMENT_ROOT'].'error/');
