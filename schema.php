@@ -1,6 +1,6 @@
 <?php
   include $_SERVER['DOCUMENT_ROOT'].'/config/init.php';
-  $schema = new schema();
+  // $schema = new schema();
 
   $table = array(
     'users' => "
@@ -145,19 +145,22 @@
     "
   );
 
-  foreach ($table as $key => $sql) {
-		try{
-			$success = $schema->create($sql);
-			// echo $sql;
-			if ($success) {
-				echo "Query ".$key." Executed Successfully<br>";
-			}else{
-				echo "Problem While Executing Query :".$key."<br>";
-			}
-		}catch(PDOException $e){
-			error_log(Date("M d, Y h:i:s a").' : (run Query) : '.$e->getMessage()."\r\n",3,ERROR_PATH.'error.log');
-			return false;
 
-		}
-	}
+  debugger($table, true);
+
+  // foreach ($table as $key => $sql) {
+	// 	try{
+	// 		$success = $schema->create($sql);
+	// 		// echo $sql;
+	// 		if ($success) {
+	// 			echo "Query ".$key." Executed Successfully<br>";
+	// 		}else{
+	// 			echo "Problem While Executing Query :".$key."<br>";
+	// 		}
+	// 	}catch(PDOException $e){
+	// 		error_log(Date("M d, Y h:i:s a").' : (run Query) : '.$e->getMessage()."\r\n",3,ERROR_PATH.'error.log');
+	// 		return false;
+
+	// 	}
+	// }
 ?>
