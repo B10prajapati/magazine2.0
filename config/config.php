@@ -29,14 +29,14 @@
         ini_set('html_errors', 'On');
 	}
 
-	define('ERROR_PATH', $_SERVER['DOCUMENT_ROOT'].'error/');
-	define('CLASS_PATH', $_SERVER['DOCUMENT_ROOT'].'database/class/');
-	define('CONFIG_PATH', $_SERVER['DOCUMENT_ROOT'].'config/');
-	define('ADMIN_PATH', $_SERVER['DOCUMENT_ROOT'].'admin/');
+	define('ERROR_PATH', $_SERVER['DOCUMENT_ROOT'].'/error/');
+	define('CLASS_PATH', $_SERVER['DOCUMENT_ROOT'].'/database/class/');
+	define('CONFIG_PATH', $_SERVER['DOCUMENT_ROOT'].'/config/');
+	define('ADMIN_PATH', $_SERVER['DOCUMENT_ROOT'].'/admin/');
 
 	define('ALLOWED_EXTENSION', ['jpg','png','jpeg','tif']);
 
 
-	define('UPLOAD_URL',SITE_URL."upload/");
+	define('UPLOAD_URL',SITE_URL."/upload/");
 	
 ?>
