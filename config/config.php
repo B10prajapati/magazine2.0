@@ -18,13 +18,15 @@
 		define('SITE_URL', 'http://magazine.com/');
 	}else{
 		error_reporting(E_ALL);
-		define('DB_HOST', 'fdb25.awardspace.net');
-		define('DB_NAME', '3460660__magazine');
-		define('DB_USER', 'admin');
-		define('DB_PASS', 'wT1t},bd62RF@fA[');
-		define('SITE_URL', 'https://sahasprajapati.000webhostapp.com/');
-	
-	ini_set("display_errors", 1);	
+		define('DB_HOST', 'sql303.epizy.com');
+		define('DB_NAME', 'epiz_25947121_magazine');
+		define('DB_USER', 'epiz_25947121');
+		define('DB_PASS', 'VYoJkEwARyu2WI');
+		define('SITE_URL', 'http://b10prajapati.epizy.com/');
+
+        
+        ini_set('display_errors', 'On');
+        ini_set('html_errors', 'On');
 	}
 
 	define('ERROR_PATH', $_SERVER['DOCUMENT_ROOT'].'error/');
