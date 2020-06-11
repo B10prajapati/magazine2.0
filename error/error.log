@@ -1,4 +1,0 @@
-Jun 11, 2020 12:50:07 pm : (addData) : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'subject' in 'field list'
-Jun 11, 2020 12:51:30 pm : (addData) : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'subject' in 'field list'
-Jun 11, 2020 12:51:50 pm : (addData) : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'subject' in 'field list'
-Jun 11, 2020 01:15:28 pm : (addData) : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'api' in 'field list'

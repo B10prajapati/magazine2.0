@@ -122,7 +122,7 @@
         (
           id int not null AUTO_INCREMENT PRIMARY KEY,
           followusname text,
-          icon text,						
+          image text,						
           url text,	
           status enum('Active','Passive') default 'Active',
           added_by int,						

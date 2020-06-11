@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'config/init.php';
+include '../config.php';
 if ($_POST) {
   if (isset($_POST['email']) && !empty($_POST['email'])) {
     $data['email'] = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);

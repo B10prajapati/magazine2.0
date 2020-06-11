@@ -1,5 +1,5 @@
 <?php
-  include_once $_SERVER['DOCUMENT_ROOT'].'config/init.php';
+  include_once $_SERVER['DOCUMENT_ROOT'].'/config/init.php';
 
   function renderAd($adv) {
     // Thumbnail Load
