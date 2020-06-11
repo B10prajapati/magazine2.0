@@ -1,3 +1,14 @@
+<?php
+  // Most popular  Data
+  $get_data = CallAPI('GET',SITE_URL.'api/followus/read', false);
+  $response = json_decode($get_data, true);
+  
+  $follow_error = $response['error'];
+  $follow_data = $response['data'];
+  $follow_message = $response['message'];
+  
+
+?>
       <!-- Footer -->
   <footer class="footer font-small bg-dark pt-4" style="color:azure">
 
@@ -47,22 +58,36 @@
       <div class="col-md-3 mb-md-0 mb-3">
 
         <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
+        <h5 class="text-uppercase">Subscribe</h5>
 
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
-          </li>
-        </ul>
+        <form action="../process/create-edit" method="POST">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input name='email' type="email" class="form-control" id="email" aria-describedby="emailHelp"/>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">  
+            <label hidden for="page_name">Page Name</label>
+            <input hidden class="form-control" name="page_name" id="page_name" value="<?php echo strtolower($title)?>" />
+          </div>
+          <input type="hidden" name="api" value="subscriber">
+
+          <button name='submit' type="submit" class="btn btn-primary" value="create">Subscribe</button>
+        </form>
+
+        <?php
+        
+          foreach($follow_data as $data) {
+            $thumbnail = '../../upload/'.'followus'.'/' ;
+            $thumbnail = (isset($data['image']) && !empty($data['image']) && file_exists($thumbnail.$data['image'])) ? $thumbnail.$data['image'] : '../../upload/'.'noimg.jpg';
+         
+            echo '
+              <a href='.$data['url'].'>
+                <image src='.$thumbnail.' height="50" width="50"/>
+              </a>
+            ';
+          }
+        ?>
 
       </div>
       <!-- Grid column -->

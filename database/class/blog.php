@@ -7,7 +7,7 @@
     }
 
     // Read Dataa
-    public function readBlog($method, $cat_id, $offset, $no_of_data, $date,$is_die=false){
+    public function readBlog($method, $cat_id, $offset, $no_of_data, $date, $search,$is_die=false){
 
       switch ($method) {
         case 'byDate':
@@ -187,6 +187,29 @@
                   'status'=>'Active',
                 )
               ),
+            'order' =>array(
+                'columnname'=>'view',
+                'orderType'=>'DESC'
+              ),
+            'limit' => array(
+                  'offset' => $offset,
+                  'no_of_data' => $no_of_data	
+                 )
+          );  
+        break;
+        case 'searchWithLimit':
+          $args = array(
+            'fields' => ['id',
+                          'title',
+                          'content',
+                          'featured',
+                          'categoryid',
+                          '(SELECT categoryname from categories where id = categoryid) as category',
+                          'view',
+                          'image',
+                        'created_date'],
+                          
+            'where' => " where title LIKE '".$search."%'",
             'order' =>array(
                 'columnname'=>'view',
                 'orderType'=>'DESC'

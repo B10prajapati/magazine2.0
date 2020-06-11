@@ -16,7 +16,8 @@ include '../inc/navbar.php';
         <tr>
           <th>Id</th>
           <th>Name</th>
-          <th>icon</th>
+          <th>image</th>
+          <th>Thumbnail</th>
           <th>URL</th>
           <th>Status</th>
           <th>Options</th>
@@ -32,15 +33,20 @@ include '../inc/navbar.php';
           $message = $response['message'];
           
           function renderTableData($data) {
+            global $title;
+            $thumbnail = '../../upload/'.strtolower($title).'/' ;
+            $thumbnail = (isset($data['image']) && !empty($data['image']) && file_exists($thumbnail.$data['image'])) ? $thumbnail.$data['image'] : '../../upload/'.'noimg.jpg';
+         
             echo '
               <tr>
                 <td>'.$data['id'].'</td>
                 <td>'.$data['followusname'].'</td>
-                <td>'.$data['icon'].'</td>
+                <td>'.$data['image'].'</td>
+                <td><image src="'.$thumbnail.'"  height="100px" width="auto"/></td>
                 <td>'.$data['url'].'</td>
                 <td>'.$data['status'].'</td>
                 <td>
-                  <a class="btn btn-success" href="javascript:;" onClick="edit(this);" data-info=\''.json_encode($data).'\'>
+                  <a class="btn btn-success" href="javascript:;" onClick="edit(this);" data-info=\''.json_encode($data).'\' data-thumbnail="'.$thumbnail.'">
                     Edit
                   </a>
                   <a class="btn btn-danger" href="javascript:;" onClick="deleteData(this);" data-info=\''.json_encode($data).'\'>
@@ -67,15 +73,19 @@ include '../inc/navbar.php';
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
-          <h4 id='modal-title'><span class="glyphicon glyphicon-lock"></span> Create <?php echo $title?></h4>
+          <h4 id='modal-title'><span class="glyphimage glyphimage-lock"></span> Create <?php echo $title?></h4>
         
           <button followusname="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-        <form id="form" role="form" method="POST" action="../process/create-edit">
+        <form id="form" role="form" method="POST" action="../process/create-edit" enctype="multipart/form-data">
           <div class="form-group">  
             <label for="id">ID</label>
             <input class="form-control" name="id" id="id" value="Auto Assigned" disabled/>
+          </div>
+          
+          <div class="form-group">  
+            <input hidden class="form-control" name="old_image" id="old_image" value="" disabled/>
           </div>
           <div class="form-group">  
             <label hidden for="page_name">Page Name</label>
@@ -86,12 +96,19 @@ include '../inc/navbar.php';
             <input class="form-control" name="followusname" id="followusname"/>
           </div>
           <div class="form-group">  
-            <label for="icon">Icon</label>
-            <input class="form-control" name="icon" id="icon"/>
+            <label for="url">URL</label>
+            <input class="form-control" name="url" id="url"/>
+          </div>
+
+        
+          <div class="form-group"> 
+            <label for="image">image</label>
+            
+            <input class="form-control" type="file" name="image" id="image" accept="image/*"></input>
           </div>
           <div class="form-group">  
-            <label for="url">Url</label>
-            <input class="form-control" name="url" id="url"></input>
+            <label for="thumbnail">Thumbnail</label>
+            <Image  name="thumbnail" id="thumbnail" height="100px" width="auto"/>
           </div>
           
           <div class="form-group">
@@ -101,11 +118,11 @@ include '../inc/navbar.php';
               <option value="Passive">Passive</option>
             </select>
           </div>
-          <button type="submit" name="submit" value="create" class="btn btn-success btn-block" id="submit"><span class="glyphicon glyphicon-off"></span> Submit</button>
+          <button type="submit" name="submit" value="create" class="btn btn-success btn-block" id="submit"><span class="glyphimage glyphimage-off"></span> Submit</button>
         </form>  
         </div>
         <div class="modal-footer">
-          <button type="submit" name="cancel" value="Cancel" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button type="submit" name="cancel" value="Cancel" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphimage glyphimage-remove"></span> Cancel</button>
         </div>
 
       </div>
@@ -126,12 +143,17 @@ include '../inc/footer.php';
   $('#myBtn').click(function() {
     $('#confirm-text').remove();
     $('.form-group').removeAttr('hidden');
-    $('#icon').val('');
+    $('#image').val('');
     $('#id').val('Auto Assigned');
     $('#status').val('Active');
     $('#followusname').val('Simple');
     $('#submit').val('create');
     $('#myModal').modal();
+
+     
+    $('#old_image').val('');
+    $('#url').val('');
+    $('#thumbnail').attr('src', '');
 
   });
  
@@ -140,15 +162,21 @@ include '../inc/footer.php';
     if (typeof(info) != 'object') {
       info = JSON.parse(info);
     }
+    
+    var thumbnail = $(element).data('thumbnail');
     $('#confirm-text').remove();
     $('.form-group').removeAttr('hidden');
     $('#modal-title').html('Edit followus');
     $('#submit').val('update');
-    $('#icon').val(info.icon);
     $('#status').val(info.status);
     $('#followusname').val(info.followusname);
     $('#id').val(info.id);
     $('#myModal').modal();
+    
+    $('#old_image').val(info.image);
+    $('#url').val(info.image);
+    $('#thumbnail').attr('src', thumbnail);
+   
   }
 
   
@@ -170,4 +198,15 @@ include '../inc/footer.php';
     $('#id').val(info.id);
     $('#myModal').modal();
   }
+
+  $('#image').change(function() {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      // get loaded data and render thumbnail
+      $('#thumbnail').attr('src', e.target.result);
+    }
+    // read the image file as data URL
+    reader.readAsDataURL(this.files[0]);
+  });
 </script>

@@ -1,7 +1,6 @@
 <?php
   include '../config.php';
-  $pagename = '../pages/'.$_POST['page_name'];
-  $pagename = (isset($_POST['blogid']) && !empty($_POST['blogid'])) ? $pagename.'?id='.$_POST['blogid'] : $pagename;
+
   if ($_POST) {
     if (isset($_POST['submit'])) {
   
@@ -10,7 +9,7 @@
         'data' => array()
         );
       foreach($_POST as $key => $value) {
-        if ($key != 'id' && !empty($key) && !empty($value) && $key != 'submit' && $key != 'page_name' && $key != 'api' ) 
+        if ($key != 'id' && !empty($key) && !empty($value) && $key != 'submit' && $key != 'page_name' ) 
           if($key != 'content')
             $datas['data'][$key] = sanitize($value); 
           else
@@ -23,10 +22,10 @@
             'id'=> $datas['commentid']
           );
         }else {
-          redirect($pagename, 'error', 'Undefined actioned called');
+          redirect('../pages/'.$_POST['page_name'], 'error', 'Undefined actioned called');
         }
               
-        $res = CallAPI('POST',SITE_URL.'api/'.$_POST['api'].'/'.$_POST['submit'], json_encode($datas));  
+        $res = CallAPI('POST',SITE_URL.'api/'.$_POST['page_name'].'/'.$_POST['submit'], json_encode($datas));  
         echo $res;
         $response = json_decode($res, true);
         $error = $response['error'];
@@ -34,15 +33,15 @@
         $message = $response['message'];
       
         if (empty($error)) {
-          redirect($pagename, 'success', 'Your Data Submitted. Thank You for your input');
+          redirect('../pages/'.$_POST['page_name'], 'success', 'Comment has been sent for moderation. Thank You for your comment');
         } else {
-          redirect($pagename, 'error', 'Error Occured during '.$_POST['submit'].' categroy: '.$error);
+          redirect('../pages/'.$_POST['page_name'], 'error', 'Error Occured during '.$_POST['submit'].' categroy: '.$error);
         }
     
     } else {
-      redirect($pagename, 'error', 'Data not submitted');
+      redirect('../pages/'.$_POST['page_name'], 'error', 'Data not submitted');
     }
   } else {
-    redirect($pagename, 'error', 'Unauthorized access');
+    redirect('../pages/'.$_POST['page_name'], 'error', 'Unauthorized access');
   }
 ?>

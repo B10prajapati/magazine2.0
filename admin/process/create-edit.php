@@ -1,6 +1,7 @@
 <?php
   include '../config.php';
   include '../inc/checkLogin.php';
+
   function upload() {
     $success = uploadImage($_FILES['image'], $_POST['page_name']);
     if ($success) {

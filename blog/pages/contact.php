@@ -1,26 +1,33 @@
 <?php 
-  $title = 'Contact Us';
+  include '../config.php';
+  $title = 'Contact';
   include '../inc/header.php';
   include '../inc/navbar.php';
-
+  flashMessage();
 ?>
-
-<div class="container">
-  <form>
+<div class="container" >
+  <h3>Contact Us</h3>
+  <form action="../process/contactus" method="POST">
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input name='email' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <label for="email">Email address</label>
+      <input name='email' type="email" class="form-control" id="email" aria-describedby="emailHelp"/>
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input name='password' type="password" class="form-control" id="exampleInputPassword1">
+      <label for="subject">Subject</label>
+      <input name='subject' type="text" class="form-control" id="subject"/>
     </div>
-    <div class="form-group form-check">
-      <input name='rememberMe' type="checkbox" class="form-check-input" id="rememberMe">
-      <label class="form-check-label" for="rememberMe">Check me out</label>
+    <div class="form-group">
+      <label for="message">Mesage</label>
+      <textarea name='message' type="message" class="form-control" id="message" >
+
+      </textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">  
+      <label hidden for="page_name">Page Name</label>
+      <input hidden class="form-control" name="page_name" id="page_name" value="<?php echo strtolower($title)?>" />
+    </div>
+    <button name='submit' type="submit" class="btn btn-primary" value="create">Submit</button>
   </form>
 </div>
 <?php

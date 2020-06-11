@@ -22,7 +22,8 @@ if (isset($_GET['method']) && !empty($_GET['method'])) {
     (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) ? $_GET['cat_id'] : 1,
     (isset($_GET['offset']) && (!empty($_GET['offset']) || $_GET['offset'] == 0)) ? $_GET['offset'] : 0,
     (isset($_GET['no_of_data']) && !empty($_GET['no_of_data'])) ? $_GET['no_of_data'] : 10,
-    (isset($_GET['date']) && !empty($_GET['date'])) ? $_GET['date'] : 2020
+    (isset($_GET['date']) && !empty($_GET['date'])) ? $_GET['date'] : 2020,
+    (isset($_GET['search']) && !empty($_GET['search'])) ? $_GET['search'] : '',
   );
   if (isset($data)) {
     if (!empty($data)) {

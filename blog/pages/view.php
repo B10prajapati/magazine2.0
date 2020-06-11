@@ -197,6 +197,7 @@
               <input type="hidden" name="commentType" id="comment_type" value="comment">
               <input type="hidden" name="blogid" value="<?php echo($_GET['id']) ?>">
               <input type="hidden" name="page_name" value="view">
+              <input type="hidden" name="api" value="comment">
               <button class="btn btn-primary" type="submit" name="submit" value="create">Submit</button>
             </div>
           </div>

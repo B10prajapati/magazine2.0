@@ -1,6 +1,6 @@
 <?php
   include '../config.php';
-  $title="Magazine";
+  $title="index";
   include '../inc/header.php';
   include '../inc/navbar.php';
  
@@ -61,7 +61,7 @@
   
 
   
- 
+ flashMessage();
 ?>
 
 

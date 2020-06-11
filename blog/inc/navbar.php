@@ -21,7 +21,10 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item m-2 ">
-           </li>
+            <form action="../pages/search.php" method="POST">
+              <input type="text" name="search" placeholder="Search..">
+            </form>
+          </li>
         
         </ul>
     </div>
